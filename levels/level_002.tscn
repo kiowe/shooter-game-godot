@@ -99,10 +99,6 @@ data = PackedVector3Array(-3, 0.25, 2, 3, 0.25, 2, -3, -0.25, 2, 3, 0.25, 2, 3, 
 
 [node name="WorldEnvironment" parent="." instance=ExtResource("1_i6g00")]
 
-[node name="CharacterBody3D" parent="." node_paths=PackedStringArray("CAMERA_CONTROLLER") instance=ExtResource("2_xl86t")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 4)
-CAMERA_CONTROLLER = NodePath("CameraController/Camera3D")
-
 [node name="Floor" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 mesh = SubResource("BoxMesh_gd0ev")
@@ -112,8 +108,14 @@ mesh = SubResource("BoxMesh_gd0ev")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_oahyi")
 
+[node name="CharacterBody3D" parent="." node_paths=PackedStringArray("CAMERA_CONTROLLER", "ANIMATIONPLAYER", "CROUCH_SHAPECAST") instance=ExtResource("2_xl86t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.068023, 4)
+CAMERA_CONTROLLER = NodePath("CameraController/Camera3D")
+ANIMATIONPLAYER = NodePath("AnimationPlayer")
+CROUCH_SHAPECAST = NodePath("ShapeCast3D")
+
 [node name="LowerPlatform" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1.75, -5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1.7, -5)
 mesh = SubResource("BoxMesh_xc4gq")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="LowerPlatform"]

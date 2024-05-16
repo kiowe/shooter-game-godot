@@ -123,8 +123,11 @@ data = PackedVector3Array(-4, 1, 1, 4, -1, 1, -4, -1, 1, -4, 1, -1, -4, -1, -1, 
 
 [node name="WorldEnvironment" parent="." instance=ExtResource("1_db21n")]
 
-[node name="CharacterBody3D" parent="." node_paths=PackedStringArray("CAMERA_CONTROLLER") instance=ExtResource("4_liofc")]
+[node name="CharacterBody3D" parent="." node_paths=PackedStringArray("CAMERA_CONTROLLER", "ANIMATIONPLAYER", "CROUCH_SHAPECAST") instance=ExtResource("4_liofc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 CAMERA_CONTROLLER = NodePath("CameraController/Camera3D")
+ANIMATIONPLAYER = NodePath("AnimationPlayer")
+CROUCH_SHAPECAST = NodePath("ShapeCast3D")
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)

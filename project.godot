@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [display]
 
 window/size/always_on_top=true
+window/vsync/vsync_mode=2
 
 [input]
 
