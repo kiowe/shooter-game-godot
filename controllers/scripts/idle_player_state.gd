@@ -2,6 +2,11 @@ class_name IdlePlayerState
 
 extends State
 
-func update(delta: float):
-	if Global.player.velocity.length() > 0.0:
+@export var ANIMATION : AnimationPlayer
+
+func enter() -> void:
+	ANIMATION.pause()
+
+func update(_delta: float):
+	if Global.player.velocity.length() > 0.0 and Global.player.is_on_floor():
 		transition.emit("WalkingPlayerState")

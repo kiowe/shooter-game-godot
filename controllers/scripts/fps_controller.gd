@@ -1,7 +1,10 @@
 extends CharacterBody3D
 
 @export var SPEED_DEFAULT : float = 5.0
-@export var SPEED_CROUCH : float = 3.0
+@export var SPEED_SPRINTING : float = 7.5
+@export var SPEED_CROUCH : float = 2.0
+@export var ACCELERATION : float = 0.1
+@export var DECELERATION : float = 0.25
 @export var JUMP_VELOCITY : float = 4.5
 @export var TOGGLE_CROUCH : bool = true
 @export_range(5, 10, 0.1) var CROUCH_SPEED : float = 7.0
@@ -92,11 +95,12 @@ func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
-		velocity.x = direction.x * _speed
-		velocity.z = direction.z * _speed
+		velocity.x = lerp(velocity.x, direction.x * _speed, ACCELERATION)
+		velocity.z = lerp(velocity.z, direction.z * _speed, ACCELERATION)
 	else:
-		velocity.x = move_toward(velocity.x, 0, _speed)
-		velocity.z = move_toward(velocity.z, 0, _speed)
+		var vel = Vector2(velocity.x, velocity.z)
+		velocity.x = vel.normalized().x * move_toward(Vector2(velocity.x, velocity.z).length(), 0, DECELERATION)
+		velocity.z = vel.normalized().y * move_toward(Vector2(velocity.x, velocity.z).length(), 0, DECELERATION)
 
 	move_and_slide()
 
