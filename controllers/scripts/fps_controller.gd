@@ -14,7 +14,9 @@ var _mouse_rotation : Vector3
 var _player_rotation : Vector3
 var _camera_rotation : Vector3
 
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+var _current_rotation : float
+
+var gravity = 12.0
 
 func _input(event):
 	if event.is_action_pressed("exit"):
@@ -28,6 +30,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _update_camera(delta):
 	# Rotate camera using euler rotation
+	_current_rotation = _rotation_input
 	_mouse_rotation.x += _tilt_input * delta
 	_mouse_rotation.x = clamp(_mouse_rotation.x, TILT_LOWER_LIMIT, TILT_UPPER_LIMIT)
 	_mouse_rotation.y += _rotation_input * delta
@@ -53,7 +56,8 @@ func _ready():
 	CROUCH_SHAPECAST.add_exception($".")
 
 func _physics_process(delta: float) -> void:
-	Global.debug.add_property("MouseRotation", _mouse_rotation, 3)
+	Global.debug.add_property("Velocity","%.2f" % velocity.length(), 2)
+	Global.debug.add_property("ShapeCast", CROUCH_SHAPECAST.is_colliding(), 3)
 	
 	# Update camera movement based on mouse movement
 	_update_camera(delta)
@@ -62,7 +66,6 @@ func update_gravity(delta) -> void:
 	velocity.y -= gravity * delta
 
 func update_input(speed: float, acceleration: float, deceleration: float) -> void:
-	Global.debug.add_property("MovementSpeed", speed, 2)
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
