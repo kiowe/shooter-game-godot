@@ -13,7 +13,7 @@ var DOUBLE_JUMP : bool = false
 
 func enter(previous_state) -> void:
 	PLAYER.velocity.y += JUMP_VELOCITY
-	ANIMATION.pause()
+	ANIMATION.play("JumpStart")
 
 func exit() -> void:
 	DOUBLE_JUMP = false
@@ -28,4 +28,5 @@ func update(delta):
 		PLAYER.velocity.y = DOUBLE_JUMP_VELOCITY
 	
 	if PLAYER.is_on_floor():
+		ANIMATION.play("JumpEnd")
 		transition.emit("IdlePlayerState")
