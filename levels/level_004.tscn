@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b5inwr471y6p"]
+[gd_scene load_steps=18 format=3 uid="uid://b5inwr471y6p"]
 
 [ext_resource type="PackedScene" uid="uid://btv0a42cgxt8g" path="res://levels/WE_test.tscn" id="1_e87y0"]
 [ext_resource type="PackedScene" uid="uid://cfs4ecm5k44dn" path="res://controllers/fps_controller.tscn" id="2_8lw8q"]
@@ -114,6 +114,8 @@ size = Vector3(1, 8, 4)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_va0je"]
 data = PackedVector3Array(-0.5, 4, 2, 0.5, 4, 2, -0.5, -4, 2, 0.5, 4, 2, 0.5, -4, 2, -0.5, -4, 2, 0.5, 4, -2, -0.5, 4, -2, 0.5, -4, -2, -0.5, 4, -2, -0.5, -4, -2, 0.5, -4, -2, 0.5, 4, 2, 0.5, 4, -2, 0.5, -4, 2, 0.5, 4, -2, 0.5, -4, -2, 0.5, -4, 2, -0.5, 4, -2, -0.5, 4, 2, -0.5, -4, -2, -0.5, 4, 2, -0.5, -4, 2, -0.5, -4, -2, 0.5, 4, 2, -0.5, 4, 2, 0.5, 4, -2, -0.5, 4, 2, -0.5, 4, -2, 0.5, 4, -2, -0.5, -4, 2, 0.5, -4, 2, -0.5, -4, -2, 0.5, -4, 2, 0.5, -4, -2, -0.5, -4, -2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_spi82"]
 
 [node name="Node3D" type="Node3D"]
 
@@ -275,3 +277,27 @@ skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="env/Box3/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_va0je")
+
+[node name="Light1" type="MeshInstance3D" parent="env"]
+transform = Transform3D(-8.74228e-09, 0, 0.2, 0, 1.9, 0, -0.2, 0, -8.74228e-09, -4, 1, 0)
+mesh = SubResource("BoxMesh_spi82")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="env/Light1"]
+light_energy = 0.701
+directional_shadow_mode = 1
+sky_mode = 1
+
+[node name="Light2" type="MeshInstance3D" parent="env"]
+transform = Transform3D(-8.74228e-09, 0, 0.2, 0, 1.9, 0, -0.2, 0, -8.74228e-09, -4, 1, -4)
+mesh = SubResource("BoxMesh_spi82")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="env/Light2"]
+transform = Transform3D(5, 0, 0, 0, 0.526316, 0, 0, 0, 5, 0, 0, 0)
+light_energy = 10.041
+light_size = 0.16
+light_specular = 0.949
+shadow_enabled = true
+shadow_bias = 0.0
+shadow_normal_bias = 9.632
+shadow_blur = 0.0
+omni_shadow_mode = 0

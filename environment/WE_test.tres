@@ -10,6 +10,7 @@ sky_material = SubResource("PanoramaSkyMaterial_cmrwf")
 
 [resource]
 background_mode = 2
+background_energy_multiplier = 0.27
 sky = SubResource("Sky_0poj2")
 ambient_light_source = 3
 reflected_light_source = 2
