@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="Weapons" load_steps=3 format=3 uid="uid://c0rv8nbua6dq1"]
+
+[ext_resource type="ArrayMesh" uid="uid://dofhdlvmjwd1h" path="res://meshes/weapons/smg_mx_08/mx_08_mesh.res" id="1_802rj"]
+[ext_resource type="Script" path="res://meshes/weapons/weapons.gd" id="2_buo3t"]
+
+[resource]
+script = ExtResource("2_buo3t")
+name = &"smg_mx_08"
+position = Vector3(0.235, -0.4, -0.435)
+rotation = Vector3(4, 5, 6)
+scale = Vector3(0.09, 0.09, 0.09)
+sway_min = Vector2(-30, -30)
+sway_max = Vector2(350, 30)
+sway_speed_position = 0.07
+sway_speed_rotation = 0.1
+sway_amount_position = 0.1
+sway_amount_rotation = 30.0
+idle_sway_adjustment = 300.0
+idle_sway_rotation_strength = 350.0
+random_sway_amount = 5.0
+mesh = ExtResource("1_802rj")
+shadow = false

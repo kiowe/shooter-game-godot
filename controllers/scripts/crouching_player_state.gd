@@ -4,9 +4,9 @@ class_name CrouchingPlayerState extends PlayerMovementState
 @export var ACCELERATION : float = 0.1
 @export var DECELERATION : float = 0.25
 @export_range(1, 6, 0.1) var CROUCH_SPEED : float = 4.0
-@export var WEAPON_BOB_SPEED : float = 4.0
-@export var WEAPON_BOB_H : float = 0.6
-@export var WEAPON_BOB_V : float = 0.3
+@export var WEAPON_BOB_SPEED : float = 4.5
+@export var WEAPON_BOB_H : float = 0.7
+@export var WEAPON_BOB_V : float = 0.4
 
 @onready var CROUCH_SHAPECAST : ShapeCast3D = %ShapeCast3D
 

@@ -2,6 +2,8 @@
 
 class_name WeaponController extends Node3D
 
+signal weapon_fired
+
 @export var WEAPON_TYPE : Weapons:
 	set(value):
 		WEAPON_TYPE = value
@@ -27,16 +29,18 @@ var idle_sway_adjustment
 var idle_sway_rotation_strength
 var weapon_bob_amonut : Vector2 = Vector2(0, 0)
 
+var raycast_test = preload("res://assets/scenes/raycast_test.tscn")
+
 func _ready() -> void:
 	load_weapon()
 
 # just for testing
 func _input(event) -> void:
 	if event.is_action_pressed("weapon1"):
-		WEAPON_TYPE = load("res://meshes/weapons/crowbar/w_crowbar.tres")
+		WEAPON_TYPE = load("res://meshes/weapons/smg_mx_08/smg_mx_08.tres")
 		load_weapon()
 	if event.is_action_pressed("weapon2"):
-		WEAPON_TYPE = load("res://meshes/weapons/crowbar2/crowbarL.tres")
+		WEAPON_TYPE = load("res://meshes/weapons/crowbar/w_crowbar.tres")
 		load_weapon()
 	if event is InputEventMouseMotion:
 		mouse_movement = event.relative
@@ -45,6 +49,7 @@ func load_weapon() -> void:
 	weapon_mesh.mesh = WEAPON_TYPE.mesh # set weapon mesh
 	position = WEAPON_TYPE.position # set weapon position
 	rotation_degrees = WEAPON_TYPE.rotation # set weapon rotation
+	scale = WEAPON_TYPE.scale # set weapon scale
 	weapon_shadow.visible = WEAPON_TYPE.shadow # turn shadown on/off
 	idle_sway_adjustment = WEAPON_TYPE.idle_sway_adjustment
 	idle_sway_rotation_strength = WEAPON_TYPE.idle_sway_rotation_strength
@@ -105,3 +110,29 @@ func get_sway_noise() -> float:
 	
 	var noise_location : float = sway_noise.noise.get_noise_2d(player_position.x, player_position.y)
 	return noise_location
+
+func _attack() -> void:
+	weapon_fired.emit()
+	var camera = Global.player.CAMERA_CONTROLLER
+	var space_state = camera.get_world_3d().direct_space_state
+	var screen_center = get_viewport().size / 2
+	var origin = camera.project_ray_origin(screen_center)
+	var end = origin + camera.project_ray_normal(screen_center) * 1000
+	var query = PhysicsRayQueryParameters3D.create(origin, end)
+	query.collide_with_bodies = true
+	var result = space_state.intersect_ray(query)
+	if result:
+		_bullet_hole(result.get("position"), result.get("normal"))
+
+func _bullet_hole(position: Vector3, normal: Vector3) -> void:
+	var instance = raycast_test.instantiate()
+	get_tree().root.add_child(instance)
+	instance.global_position = position
+	instance.look_at(instance.global_transform.origin + normal, Vector3.UP)
+	if normal != Vector3.UP and normal != Vector3.DOWN:
+		instance.rotate_object_local(Vector3(1, 0, 0), 90)
+	await get_tree().create_timer(3).timeout
+	var fade = get_tree().create_tween()
+	fade.tween_property(instance, "modulate:a", 0, 0.35)
+	await get_tree().create_timer(0.35).timeout
+	instance.queue_free()

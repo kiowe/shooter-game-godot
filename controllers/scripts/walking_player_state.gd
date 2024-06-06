@@ -5,8 +5,8 @@ class_name WalkingPlayerState extends PlayerMovementState
 @export var DECELERATION : float = 0.25
 @export var TOP_ANIM_SPEED : float = 2.2
 @export var WEAPON_BOB_SPEED : float = 7.0
-@export var WEAPON_BOB_H : float = 1.0
-@export var WEAPON_BOB_V : float = 0.7
+@export var WEAPON_BOB_H : float = 1.1
+@export var WEAPON_BOB_V : float = 0.8
 
 
 func enter(previous_state) -> void:

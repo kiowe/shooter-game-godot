@@ -28,6 +28,9 @@ func update(delta):
 	if PLAYER.velocity.y < -3.0 and !PLAYER.is_on_floor():
 		transition.emit("FallingPlayerState")
 	
+	if PLAYER.is_on_floor():
+		transition.emit("IdlePlayerState")
+	
 	#if PLAYER.is_on_floor():
 		#ANIMATION.play("JumpEnd")
 		#transition.emit("IdlePlayerState")
