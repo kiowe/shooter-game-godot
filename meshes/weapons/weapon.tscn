@@ -43,7 +43,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_iup8y")
 
 [node name="Weapon" type="Node3D"]
-transform = Transform3D(-0.998129, -0.0602322, -0.0105222, -0.00646579, -0.0671498, 0.997722, -0.0608015, 0.995923, 0.0666347, 0.213601, -0.318138, -0.33)
+transform = Transform3D(-0.999009, -0.043211, -0.0106772, -0.00735321, -0.0763659, 0.997053, -0.0438991, 0.996143, 0.0759725, 0.215, -0.315, -0.33)
 script = ExtResource("1_hwpe3")
 WEAPON_TYPE = ExtResource("2_xfw1t")
 sway_noise = SubResource("NoiseTexture2D_nk6e5")

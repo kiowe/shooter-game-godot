@@ -123,10 +123,21 @@ data = PackedVector3Array(-4, 1, 1, 4, -1, 1, -4, -1, 1, -4, 1, -1, -4, -1, -1, 
 
 [node name="WorldEnvironment" parent="." instance=ExtResource("1_db21n")]
 
-[node name="CharacterBody3D" parent="." node_paths=PackedStringArray("CAMERA_CONTROLLER", "ANIMATIONPLAYER", "CROUCH_SHAPECAST") instance=ExtResource("4_liofc")]
+[node name="CharacterBody3D" parent="." node_paths=PackedStringArray("CAMERA_CONTROLLER", "ANIMATIONPLAYER", "CROUCH_SHAPECAST", "WEAPON_CONTROLLER") instance=ExtResource("4_liofc")]
 CAMERA_CONTROLLER = NodePath("CameraController/Camera3D")
 ANIMATIONPLAYER = NodePath("AnimationPlayer")
 CROUCH_SHAPECAST = NodePath("ShapeCast3D")
+WEAPON_CONTROLLER = NodePath("CameraController/Camera3D/WeaponRig/Weapon")
+
+[node name="Weapon" parent="CharacterBody3D/CameraController/Camera3D/WeaponRig" index="0"]
+transform = Transform3D(-0.999009, -0.043211, -0.0106772, -0.00735321, -0.0763658, 0.997053, -0.0438991, 0.996142, 0.0759725, 0.00997275, 0.0295827, -0.33)
+
+[node name="Reticle" parent="CharacterBody3D/UserInterface" index="0" node_paths=PackedStringArray("RETICLE_LINES", "PLAYER_CONTROLLER")]
+RETICLE_LINES = [NodePath("Top"), NodePath("Right"), NodePath("Bottom"), NodePath("Left")]
+PLAYER_CONTROLLER = NodePath("../..")
+
+[node name="PlayerStateMachine" parent="CharacterBody3D" index="5" node_paths=PackedStringArray("CURRENT_STATE")]
+CURRENT_STATE = NodePath("IdlePlayerState")
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
@@ -155,3 +166,5 @@ skeleton = NodePath("../Box")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ramp/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_j6kcl")
+
+[editable path="CharacterBody3D"]

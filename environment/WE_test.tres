@@ -14,4 +14,7 @@ sky = SubResource("Sky_0poj2")
 ambient_light_source = 3
 reflected_light_source = 2
 tonemap_exposure = 0.8
+tonemap_white = 5.5
 glow_enabled = true
+adjustment_brightness = 0.53
+adjustment_contrast = 0.69

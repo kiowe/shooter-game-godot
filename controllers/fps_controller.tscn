@@ -1,10 +1,9 @@
-[gd_scene load_steps=27 format=3 uid="uid://cfs4ecm5k44dn"]
+[gd_scene load_steps=26 format=3 uid="uid://cfs4ecm5k44dn"]
 
 [ext_resource type="Script" path="res://controllers/scripts/fps_controller.gd" id="1_pgc1p"]
 [ext_resource type="Material" uid="uid://b4gwd5h7ixvct" path="res://materials/player.tres" id="2_gldw4"]
 [ext_resource type="Script" path="res://scripts/reticle.gd" id="3_a5wxi"]
 [ext_resource type="Theme" uid="uid://cy8ix3em5itmm" path="res://ui/themes/debug.tres" id="4_7ss55"]
-[ext_resource type="Resource" uid="uid://bcjdowvps22kf" path="res://meshes/weapons/crowbar2/crowbarL.tres" id="4_o0fmm"]
 [ext_resource type="PackedScene" uid="uid://uxxujfsqmpjl" path="res://meshes/weapons/weapon.tscn" id="4_sckoo"]
 [ext_resource type="Script" path="res://scripts/debug.gd" id="5_lbikq"]
 [ext_resource type="Script" path="res://scripts/state_machine.gd" id="6_gjc3i"]
@@ -474,12 +473,13 @@ _data = {
 "Walking": SubResource("Animation_uwig8")
 }
 
-[node name="CharacterBody3D" type="CharacterBody3D" node_paths=PackedStringArray("CAMERA_CONTROLLER", "ANIMATIONPLAYER", "CROUCH_SHAPECAST")]
+[node name="CharacterBody3D" type="CharacterBody3D" node_paths=PackedStringArray("CAMERA_CONTROLLER", "ANIMATIONPLAYER", "CROUCH_SHAPECAST", "WEAPON_CONTROLLER")]
 script = ExtResource("1_pgc1p")
 MOUSE_SENSITIVITY = 0.4
 CAMERA_CONTROLLER = NodePath("CameraController/Camera3D")
 ANIMATIONPLAYER = NodePath("AnimationPlayer")
 CROUCH_SHAPECAST = NodePath("ShapeCast3D")
+WEAPON_CONTROLLER = NodePath("CameraController/Camera3D/WeaponRig/Weapon")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -500,8 +500,7 @@ update_mode = 1
 [node name="WeaponRig" type="Node3D" parent="CameraController/Camera3D"]
 
 [node name="Weapon" parent="CameraController/Camera3D/WeaponRig" instance=ExtResource("4_sckoo")]
-transform = Transform3D(-0.999717, -0.0173835, 0.0162172, 0.0147126, 0.0834392, 0.996404, -0.0186741, 0.996361, -0.0831599, -0.213226, -0.301805, -0.3)
-WEAPON_TYPE = ExtResource("4_o0fmm")
+transform = Transform3D(-0.999009, -0.043211, -0.0106772, -0.00735321, -0.0763658, 0.997053, -0.0438991, 0.996142, 0.0759725, 0.215, -0.315, -0.33)
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="."]
 unique_name_in_owner = true

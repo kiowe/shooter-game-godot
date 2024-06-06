@@ -1,6 +1,4 @@
-class_name JumpingPlayerState
-
-extends PlayerMovementState
+class_name JumpingPlayerState extends PlayerMovementState
 
 @export var SPEED : float = 7.5
 @export var ACCELERATION : float = 0.1
